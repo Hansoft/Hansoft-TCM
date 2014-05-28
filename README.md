@@ -10,12 +10,14 @@ Either you can choose to test the prebuilt solution by following the first set o
 -----------------------
 
 Setting up Jean
+-----------------------
 1. Download topshelf (http://topshelf-project.com/) and put TopShelf.dll in the JeanTCM folder.
 2. Import the content in the database folder into a new database in the Hansoft Server Administrator.
 3. Change the Connection element in JeanTCM/JeanSettings.xml to connect to the new database.
 4. If you want to start Jean as an ordinary application, just start Jean.exe. If you want to install it as an service, write Jean -install in the command prompt.
 
 Setting up the client plugin
+-----------------------
 1. Modify the following line in the install.bat file, to specify your server port, database name and if you have changed the SDK user you should change that as well
 	-clocalhost:50257:"TestCaseMngmt":Jean:welcome
 2. Run install.bat
