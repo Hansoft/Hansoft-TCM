@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+
+  <LoadAssemblies>
+    <Assembly Path="CopyBehavior.dll" />
+    <Assembly Path="DeriveBehavior.dll" />
+    <Assembly Path="TriggerBehavior.dll" />
+    <Assembly Path="TCMExtension.dll" />
+  </LoadAssemblies>
+  <!-- NOTE:
+       This is an example settings file for Jean for Hansoft that is applicable when used with the Test case management kit for Hansoft.
+       See http://github.com/Hansoft/Hansoft-TCM
+       
+       For a description of the generic behaviors and their parameters that are used below, please refer to the
+       standard JeanSettings.xml file for Jean. See: http://github.com/Hansoft/Hansoft-Jean-Jean
+  -->
+
+  <Connection HansoftServerHost="localhost" HansoftServerPort="50257" HansoftDatabase="TestCaseMngmt" HansoftSdkUser="Jean" HansoftSdkUserPassword="welcome" EventWindow="500"/>
+  <Behaviors>
+
+    <DeriveBehavior HansoftProject="Requirements" View="Backlog" Find="Itemtype=&quot;Backlog item&quot;">
+      <!-- Update the summary column for the user stories linked to requirements -->
+      <CustomColumn Name="Development Completed" Expression="Hansoft.Jean.Behavior.DeriveBehavior.Expressions.TCMExtension.UpdateDevelopmentCompleted(current_task, true)" />
+      <CustomColumn Name="Development Scope" Expression="Hansoft.Jean.Behavior.DeriveBehavior.Expressions.TCMExtension.UpdateDevelopmentScope(current_task, true)" />
+      <CustomColumn Name="User Stories" Expression="Hansoft.Jean.Behavior.DeriveBehavior.Expressions.TCMExtension.UpdateNumUserStories(current_task, true)" />
+      <CustomColumn Name="Development Completion" Expression="Hansoft.Jean.Behavior.DeriveBehavior.Expressions.TCMExtension.UpdateDevelopmentCompletion(current_task, true)" />
+
+      <!-- Fill out the status field for the requirements -->
+      <CustomColumn Name="Requirement Status" Expression="Hansoft.Jean.Behavior.DeriveBehavior.Expressions.TCMExtension.UpdateRequirementStatus(current_task, true)" />
+    </DeriveBehavior>
+
+
+    <!-- Behavior that is monitors workflow changes on test cases and updates information about when it passed 
+         and how many times it has been run and succeeded -->
+    <TriggerBehavior HansoftProject="Test Cases" View="Backlog">
+      <Condition Expression="$WorkflowStatus == 'Test Passed'">
+        $Last Run = TIMENOW
+        $Latest Pass = TIMENOW
+        $Times Run = $Times Run + 1
+        $Times Passed = $Times Passed + 1
+      </Condition>
+      <Condition Expression="$WorkflowStatus == 'Test Failed'">
+        $Last Run = TIMENOW
+        $Times Run = $Times Run + 1
+      </Condition>
+    </TriggerBehavior>
+
+
+    <!-- Behavior that calculates number of test cases in each test suite, the success rate of test suites and the current 
+          status of a test suite -->
+    <DeriveBehavior HansoftProject="Test Cases" View="Backlog" Find="">
+      <CustomColumn Name="Num Cases" Expression="Hansoft.Jean.Behavior.DeriveBehavior.Expressions.TCMExtension.ChildCount(current_task)" />
+      <CustomColumn Name="Success Rate" Expression="Hansoft.Jean.Behavior.DeriveBehavior.Expressions.TCMExtension.CalculateSuccessRate(current_task)" />
+      <CustomColumn Name="Aggregated Pass" Expression="Hansoft.Jean.Behavior.DeriveBehavior.Expressions.TCMExtension.AggregatedPassCount(current_task)" />
+    </DeriveBehavior>
+
+
+    <!-- Behavior that transfers data from the test suite project to the backlog of the requirement project. -->
+    <CopyBehavior TargetProject="Requirements" TargetView="Backlog" TargetFind="" SourceProject="Test Cases" SourceView="Backlog" SourceFind="">
+      <ColumnMapping>
+        <Source>
+          <CustomColumn Name="Num Cases"/>
+        </Source>
+        <Target>
+          <CustomColumn Name="Test Cases"/>
+        </Target>
+      </ColumnMapping>
+      <ColumnMapping>
+        <Source>
+          <CustomColumn Name="Aggregated Pass"/>
+        </Source>
+        <Target>
+          <CustomColumn Name="Passing Tests"/>
+        </Target>
+      </ColumnMapping>
+      <ColumnMapping>
+        <Source>
+          <CustomColumn Name="Success Rate"/>
+        </Source>
+        <Target>
+          <CustomColumn Name="Success Rate"/>
+        </Target>
+      </ColumnMapping>
+    </CopyBehavior>
+  </Behaviors>
+</Configuration>
