@@ -58,6 +58,7 @@ Helpful advice
 - If you want to install your version of Jean, just write Jean -install in the command line and it will be installed as a service.
 - For debugging Jean, make sure that all dll's exists in the output directory.
 - Read the introduction to TCM to understand how it works.
+- Any errors output from Jean can be found in the Windows Event viewer. Type "Event Viewer" in the start menu. Jean's errors will be output into Windows Logs->Application.
 
 2.2 For the client side plugin
 ----------------------------------------------------
