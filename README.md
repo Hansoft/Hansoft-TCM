@@ -37,6 +37,7 @@ Now you should be able to start running Hansoft. Log in with "Product Owner Tom"
 	- https://github.com/Hansoft/Hansoft-Jean-CopyBehavior
 	- https://github.com/Hansoft/Hansoft-Jean-Behavior
 	- https://github.com/Hansoft/Hansoft-SimpleLogging
+	- https://github.com/Hansoft/HansoftTCMExtension
 
 2. Download the Hansoft SDK from http://www.hansoft.com/support/downloads/ and put unpack the contents into the same working folder
 in a folder called HansoftSDK or modify the dependencies as you see fit. 
