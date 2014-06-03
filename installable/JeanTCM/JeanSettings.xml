@@ -15,7 +15,7 @@
        standard JeanSettings.xml file for Jean. See: http://github.com/Hansoft/Hansoft-Jean-Jean
   -->
 
-  <Connection HansoftServerHost="localhost" HansoftServerPort="50257" HansoftDatabase="TestCaseMngmt" HansoftSdkUser="Jean" HansoftSdkUserPassword="welcome" EventWindow="500"/>
+  <Connection HansoftServerHost="localhost" HansoftServerPort="50256" HansoftDatabase="TestCaseMngmt" HansoftSdkUser="Jean" HansoftSdkUserPassword="welcome" EventWindow="500"/>
   <Behaviors>
 
     <DeriveBehavior HansoftProject="Requirements" View="Backlog" Find="Itemtype=&quot;Backlog item&quot;">

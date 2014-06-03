@@ -6,23 +6,38 @@ In order to run this extension you will need to have SDK license on your Hansoft
 
 Either you can choose to test the prebuilt solution by following the first set of instructions. If you want to modify the code and build upon it you should continue with the second set of instructions.
 
+Prerequisites
+-----------------------
+- Hansoft SDK License
+- A server to run Jean for Hansoft to provide automation. Windows 2008 Server or later is required as the operating system. It is recommended to run Jean on a separate server from the Hansoft database server to isolate it from potential performance impacts.  On this server the following Microsoft components needs to be installed
+- NET framework 4.5  
+- Visual Studio 2012 VC Redist  (Make sure to install the right version for your system. The x86 version is applicable for 32 bit systems and the x64 version is applicable for 64 bit systems).
+
+
 1. For testing purposes
 -----------------------
 
 Setting up Jean
 -----------------------
-1. Download topshelf (http://topshelf-project.com/) and put TopShelf.dll in the JeanTCM folder.
+1. Download topshelf (http://topshelf-project.com/) and put TopShelf.dll in the /installable/JeanTCM/ folder.
 2. Import the content in the database folder into a new database in the Hansoft Server Administrator.
-3. Change the Connection element in JeanTCM/JeanSettings.xml to connect to the new database.
-4. If you want to start Jean as an ordinary application, just start Jean.exe. If you want to install it as an service, write Jean -install in the command prompt.
+3. Make sure that the database is Online.
+4. Change the Connection element in /installable/JeanTCM/JeanSettings.xml to connect to the new database.
+5. If you want to start Jean as an ordinary application, just start Jean.exe. If you want to install it as an service, write Jean -install in the command prompt.
 
 Setting up the client plugin
 -----------------------
-1. Modify the following line in the install.bat file, to specify your server port, database name and if you have changed the SDK user you should change that as well
-	-clocalhost:50257:"TestCaseMngmt":Jean:welcome
+1. Modify the following line in the HansoftTCMExtensionClientPlugin/Installable/install.bat file, to specify your server port, database name and if you have changed the SDK user you should change that as well
+	-clocalhost:50256:"TestCaseMngmt":Jean:welcome
 2. Run install.bat
 
 Now you should be able to start running Hansoft. Log in with "Product Owner Tom" and the password is "welcome".
+
+To verify that it works, follow the following steps:
+- Go to the test case project and open the backlog.
+- Right click an item there, you should have an option called "Start test cycle" in the right click menu.
+- Move one test case to "Test Passed", verify that Times Run is increased by 1.
+If both cases above works, the system is up and running.
 
 2. For further developing
 -----------------------
