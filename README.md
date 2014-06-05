@@ -19,17 +19,27 @@ Prerequisites
 
 Setting up Jean
 -----------------------
-1. Download topshelf (http://topshelf-project.com/) and put TopShelf.dll in the /installable/JeanTCM/ folder.
-2. Import the content in the database folder into a new database in the Hansoft Server Administrator.
-3. Make sure that the database is Online.
-4. Change the Connection element in /installable/JeanTCM/JeanSettings.xml to connect to the new database.
-5. If you want to start Jean as an ordinary application, just start Jean.exe. If you want to install it as an service, write Jean -install in the command prompt.
+1. Download topshelf (http://topshelf-project.com/) and put TopShelf.dll in the /installable/JeanTCM/ folder. You should use the 3.5 version of it.
+2. Copy the dll's HPMSdkManaged_X_X.[platform].dll and HPMSdk.[platform].dll into /installable/JeanTCM/.
+3. Import the content in the database folder into a new database in the Hansoft Server Administrator. If you want to create your own Database instead, follow the instructions below.
+4. Make sure that the database is Online.
+5. Change the Connection element in /installable/JeanTCM/JeanSettings.xml to connect to the new database.
+6. If you want to start Jean as an ordinary application, just start Jean.exe. If you want to install it as an service, write Jean -install in the command prompt.
 
 Setting up the client plugin
 -----------------------
 1. Modify the following line in the HansoftTCMExtensionClientPlugin/Installable/install.bat file, to specify your server port, database name and if you have changed the SDK user you should change that as well
 	-clocalhost:50256:"TestCaseMngmt":Jean:welcome
 2. Run install.bat
+
+Setting up the database
+-----------------------
+The thought with this example is not that it should be usable as-is in a live environment. If you want to use the functionality provided it is preferable that you compile your own version that is tailormade for your needs.
+The client plugin is hardcoded to with a certain structure, so to ensure that it works you need to set up the database according to these instructions. Jean is easier to configure, you can change any column name as long as you modify JeanSettings.xml accordingly. 
+1. You will need to create an SDK user, make sure to add the login information to JeanSettings.xml.
+2. The client plugin assumes three project named (case sensitive): Requirements, Development and Test Cases.
+3. Make sure to create the columns specified in Instructions.docx in order for Jean to work. 
+
 
 Now you should be able to start running Hansoft. Log in with "Product Owner Tom" and the password is "welcome".
 
