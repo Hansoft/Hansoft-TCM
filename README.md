@@ -52,6 +52,16 @@ If both cases above works, the system is up and running.
 2. For further developing
 -----------------------
 
+Prerequisites
+----------------------------------------------------
+-Hansoft SDK License
+-Doxygen
+-Topshelf
+
+-A server to run Jean for Hansoft to provide automation. Windows 2008 Server or later is required as the operating system. It is recommended to run Jean on a separate server from the Hansoft database server to isolate it from potential performance impacts.  On this server the following Microsoft components needs to be installed
+	- NET framework 4.5  
+	- Visual Studio 2012 VC Redist  (Make sure to install the right version for your system. The x86 version is applicable for 32 bit systems and the x64 version is applicable for 64 bit systems).
+
 2.1 For the updating of columns (Jean)
 ----------------------------------------------------
 1. Download the following repositories from GitHub into the same working folder:
@@ -98,3 +108,5 @@ Helpful advice
 Helpful advice
 ----------------------------------------------------
 - If the client has been upgraded past the current DB version you can't debug the application as a new executable will be loaded. In that case you will have to install a clean client so that it matches your server version.
+- Make sure that the destination folders are not set to read-only, otherwise post copy commands will fail.
+- There's a lot of additional documentation in https://github.com/Hansoft/SAFeKit/blob/master/HansoftScaledAgileSupportKit.docx
